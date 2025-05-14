@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture & Interior Design</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            overflow-x: hidden; /* Remove horizontal scroll bar */
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #9e3176;
+            color: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: normal;
+            font-family: ALGERIAN;
+        }
+
+        header nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        header nav ul li {
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            display: block;
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin-right: 40px;
+        }
+.hero {
+    position: relative;
+    height: 100vh;
+    background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR36T_s8Nu8UbzuMiS8YHyOqpmVwahy7u8iBg&s') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+      
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            animation: fadeIn 10s forwards;
+        }
+
+        .banner {
+            position: relative;
+            z-index: 1;
+            font-size: 40px;
+            padding: 20px;
+            text-align: center;
+            opacity: 0;
+            animation: slideIn 2s forwards 2s;
+            font-family: ALGERIAN;
+            color: black;
+            font-weight: normal;
+        }
+	.banner p2,.banner p3, .banner p4{
+	   font-size: 20px;
+}
+        #about,
+        #services,
+        #team,
+        #contact,
+        #gallery {
+            display: none; /* Hide all sections by default */
+        }
+
+        #about {
+            max-width: 800px;
+            height: 100%;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: #ebc0e6;
+            box-shadow: 10px 10px 20px lightblue;
+            border-radius: 8px;
+        }
+
+        #about h2 {
+            font-size: 30px;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+            font-family: ARIALBLACK;
+        }
+
+        #about-summary,
+        #about-more {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 20px;
+            font-family: lucida calligraphy;
+        }
+
+        #read-more-btn {
+            display: block;
+            margin: 0 auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #read-more-btn:hover {
+            background-color: #0056b3;
+        }
+
+        #services {
+            width: 100%;
+            background-color: #fff;
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-image: white;
+            background-size: cover;
+        }
+
+        #services-content {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        #services h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            width: 100%;
+            height: 100%;
+            background-image: white;
+            background-size: cover;
+        }
+
+        .card {
+            width: 300px;
+            height: 400px;
+            margin: 20px;
+            perspective: 1000px;
+            cursor: pointer;
+            box-shadow: 10px 10px 5px grey;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front,
+        .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 8px;
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-front {
+            background-color: #fff;
+        }
+
+        .card-back {
+            background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREPEGJrWGdPiLC118bsLZMVC_bRgRHmfyrvg&s') no-repeat center center;
+            background-size: cover;
+            transform: rotateY(180deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5); /* Make the background semi-transparent */
+        }
+
+        .card-front h3 {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            margin: 0;
+            padding: 10px 0;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px 8px 0 0;
+            object-fit: cover;
+        }
+
+        .card-front:hover h3 {
+            opacity: 1;
+        }
+
+        .reach-us-btn {
+            padding: 20px 20px;
+            font-size: 20px;
+            font-family: Arial;
+            color: #fff;
+            background-color: #f5a142;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            position: relative;
+            z-index: 1; /* Ensure the button is above the background image */
+            margin-top: 20px; /* Add some margin to separate from other content */
+        }
+
+        .reach-us-btn:hover {
+            background-color: #0056b3;
+        }
+/* Styles for Reviews Section */
+#reviews {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin: 20px auto;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.review-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.review-slide {
+    display: flex;
+    transition: transform 1s ease-in-out;
+    width: 300%; /* Adjust the width based on the number of reviews */
+}
+
+.review {
+    width: 33.33%; /* Each review takes up one-third of the container width */
+    box-sizing: border-box;
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.stars {
+    color: #f5b301;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.review p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+.review h3 {
+    font-size: 18px;
+    color: #555;
+}
+
+/* Keyframes for sliding reviews */
+@keyframes slideReviews {
+    0% { transform: translateX(0%); }
+    33.33% { transform: translateX(-33.33%); }
+    66.66% { transform: translateX(-66.66%); }
+    100% { transform: translateX(-100%); }
+}
+
+/* Apply the animation to the review-slide */
+.review-slide {
+    animation: slideReviews 20s infinite;
+}
+s
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+.contact-container {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin:100px;
+	   
+        }
+.contact-form p2,.contact-form p3,.contact-form p4{
+	font-family:Arial;
+	font-size:20px;
+}
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+        }
+ 
+    text-decoration: none;
+    font-size: 20px;
+}
+
+        .contact-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .input-group textarea {
+            resize: vertical;
+            height: 150px;
+        }
+
+        .error {
+            display: none;
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+	
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 600px) {
+            .contact-container {
+                padding: 10px;
+            }
+
+            button {
+                width: 100%;
+                font-size: 14px;
+            }
+        }
+#team {
+    text-align: center;
+    margin: 20px 0;
+}
+
+#team h2 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: bold;
+    margin-top:80px;
+}
+
+#team p {
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 30px;
+    margin:top:90px;
+}
+
+.team-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+	    
+        }
+        .team-member {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+        .team-member:hover {
+            transform: scale(1.05);
+        }
+        .team-member img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            overflow: hidden;
+            width: 100%;
+            height: 0;
+            transition: .5s ease;
+            border-radius: 0 0 50% 50%;
+        }
+        .team-member:hover .overlay {
+            height: 100%;
+            border-radius: 50%;
+        }
+        .text {
+            color: white;
+            font-size: 16px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+#gallery {
+    text-align: center;
+    padding: 20px;
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+    margin: 20px;
+}
+
+.image-container img {
+    display: block;
+    width: 400px; /* Increase the size of the images */
+    height: auto;
+    box-shadow: 0 10px 10px grey;
+    border: none;
+    transition: transform 0.3s;
+}
+
+.image-container img:hover {
+    transform: scale(1.05);
+}
+.image-container .label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.image-container:hover .label {
+    opacity: 1;
+}
+
+.show-more {
+    display: none;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.image-container:hover .show-more {
+    display: block;
+}
+
+.show-more:hover {
+    background-color: #0056b3;
+}
+.related-images {
+    display: none;
+    margin-top: 20px;
+}
+
+.related-images img {
+    display: inline-block;
+    margin: 10px;
+    box-shadow: 0 10px 10px grey;
+    width: 300px;
+    height: auto;
+}
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+}
+
+ .footer-content p2, .footer-content p3, .footer-content p4 {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.footer-content p3 a, .footer-content p4 a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-content .socials {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-content .socials li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.footer-content .socials li a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.footer-bottom {
+    padding: 10px 0;
+    border-top: 1px solid #444;
+    font-size: 20px;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">ARCHITECT AND INTERIOR</div>
+        <nav>
+            <ul>
+                <li><a href="#home" onclick="showSection('home')">Home</a></li>
+                <li><a href="#about" onclick="showSection('about')">About Us</a></li>
+                <li><a href="#services" onclick="toggleServices()">Services</a></li>
+                <li><a href="#team" onclick="showSection('team')">Our Team</a></li>
+                <li><a href="#contact" onclick="showSection('contact')">Contact</a></li>
+                <li><a href="#gallery" onclick="showSection('gallery')">Gallery</a></li>
+            </ul>
+        </nav>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+   </header>
+    <main>
+        <section id="home" class="hero">
+           <img src=" https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFwmLihF6DTOwicww90Xbo6hxfepjlD2DGFA&s"class="hero-image">
+            <div class="banner">
+                <h1>ARCHITECT AND INTERIOR</h1>
+                <p>Innovate-Elevate-Dominate!</p>
+                <p>One step towards your dream home..!!</p>
+                <button class="reach-us-btn" onclick="showSection('contact')">Reach us</button>
+<br>
+	        <p2><strong>office:</strong>10-3-152/8,1st floor, Patel chambers, Maredpally,Secundrabad, 500026, Telangana, India</p2><br>
+	     <p3><a href="tel:+1234567890"><i class="fas fa-phone-alt"></i> +1234567890</a></p3>
+             <p4><a href="mailto:info@example.com"><i class="fas fa-envelope"></i> arofficial@gmail.com</a></p4>
+	 
+            </div>
+        </section>
+	<a name="customer-reviews"></a>
+<div id="reviews" class="reviews">
+    <h2>What clients tell about us</h2>
+    <div class="review-container">
+        <div class="review-slide">
+            <div class="review">
+                <div class="stars">★★★★★</div>
+                <p>"The team at Arch & Design transformed our home beyond our expectations. Their attention to detail and creativity are unparalleled."</p>
+                <h3>- Jane Doe</h3>
+            </div>
+            <div class="review">
+                <div class="stars">★★★★★</div>
+                <p>"We are extremely satisfied with the office design. It is modern, functional, and exactly what we envisioned. Highly recommend!"</p>
+                <h3>- John Smith</h3>
+            </div>
+            <div class="review">
+                <div class="stars">★★★★★</div>
+                <p>"Professional, innovative, and reliable. Arch & Design exceeded our expectations in every way. Our go-to firm for any design project."</p>
+                <h3>- Emily Johnson</h3>
+            </div>
+            <div class="review">
+                <div class="stars">★★★★★</div>
+                <p>They were professional, friendly, knowledgeable and helpful throughout and we could not recommend them highly enough</p>
+                <h3>- Mr. Antony</h3>
+            </div>
+            <div class="review">
+                <div class="stars">★★★★★</div>
+                <p>They have made our flat into a home, a home which we always wanted. They understood us and gave us our dream home. The journey with them has been an amazing and smooth one for sure.</p>
+                <h3>- Mrs. Megha Mailini</h3>
+            </div>
+            <div class="review">
+                <div class="stars">★★★★</div>
+                <p>I absolutely loved the work. I would definitely recommend architect and interior to anyone. They are very professional and made the entire experience amazing. The best part is that they clearly understood our requirements and budget, and provided the best possible home...</p>
+                <h3>- Mr. Shiva Rama Krishna and Mrs. Chandana</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <section id="about">
+            <h2>About Us</h2>
+            <p id="about-summary">We believe in acquiring a thorough understanding of your needs and then offering our consultancy, to provide the most optimum solutions to your visions and dreams.</p>
+            <p id="about-more" style="display: none;">With a rich legacy of delivering exceptional architecture and interior design solutions, our team of experts is dedicated to creating spaces that are not only aesthetically pleasing but also functional and sustainable. From conceptualization to execution, we meticulously plan every detail to ensure that the end result aligns perfectly with your expectations. Our holistic approach combines innovative design techniques with cutting-edge technology to bring your ideas to life. Whether it's a residential project, a commercial space, or a public building, we strive to exceed your expectations by delivering unique, customized solutions that reflect your personality and lifestyle.</p>
+            <button id="read-more-btn" onclick="toggleReadMore()">Read More</button>
+        </section>
+
+      <section id="services">
+        <div id="services-content">
+            <h2>Our Services</h2>
+            <div class="card-container">
+                <div class="card" onclick="this.classList.toggle('flipped')">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKpvCqGI4-FgKWCPAxdF_RW3t7fvfoJksAww&s" alt="Service 1">
+                            <h3>Residential Design</h3>
+                        </div>
+                        <div class="card-back">
+                            <p>Transform your home with our expert residential design services. We create functional and beautiful spaces tailored to your lifestyle.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" onclick="this.classList.toggle('flipped')">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGRsN0DByM6vN8WLCBSg62AxGNvJAbzjYopQ&s" alt="Service 2">
+                            <h3>Commercial Design</h3>
+                        </div>
+                        <div class="card-back">
+                            <p>Enhance your business environment with our innovative commercial design solutions, focusing on functionality and aesthetics.</p>
+                        </div>
+                    </div>
+                </div>
+<div class="card" onclick="this.classList.toggle('flipped')">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGT4QRIJ_4A5vyleoZrAW8Fsb0Ifv--xyGVQ&s" alt="Service 2">
+                            <h3>Interior</h3>
+                        </div>
+                        <div class="card-back">
+                            <p>Enhance your business environment with our innovative commercial design solutions, focusing on functionality and aesthetics.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" onclick="this.classList.toggle('flipped')">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0aKOlkMglxzSesp17QLnfYqsCgvulhSUbyQ&s" alt="Service 3">
+                            <h3> Renovation</h3>
+                        </div>
+                        <div class="card-back">
+                            <p>Revitalize your space with our comprehensive interior renovation services, bringing new life to outdated or inefficient areas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<section id="team">
+        <h2>Our Team</h2>
+        <p>Meet the creative minds behind our exceptional designs and innovative solutions.</p>
+        <div class="team-container">
+            <div class="team-member">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROQKGi9RLSVPjVwzSjr9B2SqJ0c2HFnEhyGg&s" alt="Senior Partner">
+                <div class="overlay">
+                    <div class="text">Varun<br>Senior Partner<br>20 years experience</div>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-QIz71SYDWmfMrtFfkUeUoc6sNpEKow1D4HXT3uG5Ix_ayopwn0FlAmAPEO0fjLT_e_o&usqp=CAU" alt="Mid-Level Partner">
+                <div class="overlay">
+                    <div class="text">Ajay<br>Mid-Level Partner<br>10 years experience</div>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src=" https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOXbOWUPYSg9U7KFrXG0fYPGtHapXfmqpjoRJ7W-zEWDMo3dyaMbxwnYbR8tVlbP09nbw&usqp=CAU"alt="Junior Partner">
+                <div class="overlay">
+                    <div class="text">Priya<br>Junior Partner<br>5 years experience</div>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKWA7EkDVbvxYSx711yz2ue94AqZTgs_YRjX8FFUM74_DAKHyEIw9RPKbrFvAV1rmNbQc&usqp=CAU" alt="Department Head">
+                <div class="overlay">
+                    <div class="text">Sravya<br>Department Head<br>15 years experience</div>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDVZeGJE3XCraFmCNHr5GFaIG9kVagfVEd46-Dvau19PenFFcjgons0NbOkVAkZOGyCyU&usqp=CAU" alt="Senior Designer">
+                <div class="overlay">
+                    <div class="text">Jashwanth<br>Senior Designer<br>12 years experience</div>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRErXzFjbteIWGz1Y8jXNISz-8fFBN6NBxRiQ&s" alt="Project Manager">
+                <div class="overlay">
+                    <div class="text">Meena<br>Project Manager<br>8 years experience</div>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src=" https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGvvUfNMfsUv9Y_PWi9DmS4M1sI0q8Elv0TiNI-wJk4Hi_KGmN5EIZvCbqp7cJOYvuZk8&usqp=CAU"alt="Intern">
+                <div class="overlay">
+                    <div class="text">Arjun<br>Intern<br>1 year experience</div>
+                </div>
+            </div>
+        </div>
+    </section>
+              <section id="contact">
+ <div class="contact-container">
+        <form id="contactForm" class="contact-form">
+	<h2><strong>Address</strong></h2>
+	<p2><strong>office:</strong>10-3-152/8,1st floor, Patel chambers, Maredpally,Secundrabad, 500026, Telangana, India</p2>
+	     <p3><a href="tel:+1234567890"><i class="fas fa-phone-alt"></i> +1234567890</a></p3>
+             <p4><a href="mailto:info@example.com"><i class="fas fa-envelope"></i> arofficial@gmail.com</a></p4>
+	     <h2>Get in touch with us</h2>
+            <div class="input-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+                <span class="error" id="nameError">Please enter your name.</span>
+            </div>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <span class="error" id="emailError">Please enter a valid email address.</span>
+            </div>
+            <div class="input-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+                <span class="error" id="messageError">Please enter your message.</span>
+            </div>
+            <button type="submit">Send Message</button>
+	
+</form>
+    </div>
+
+</section>
+<section id="gallery">
+        <h2>Gallery</h2>
+        <div class="image-container" data-related="related1">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ4Zlwd1eUb-03EPdkhzV1SX1wKCYBcLa3Eg&s" alt="Gallery Image 1">
+	     <div class="label">Interior</div>
+            <button class="show-more">Show More</button>
+        </div>
+        <div class="image-container" data-related="related2">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwXpmEP7v01sVej2QVE0227YSrHi-39OhkZg&s" alt="Gallery Image 2">
+            <div class="label">Commercial</div>
+	    <button class="show-more">Show More</button>
+        </div>
+        <div class="image-container" data-related="related3">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFwmLihF6DTOwicww90Xbo6hxfepjlD2DGFA&s" alt="Gallery Image 3">
+            <div class="label">Resedential</div>
+	    <button class="show-more">Show More</button>
+        </div>
+                <div id="related1" class="related-images">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTR9g4ESNJSCEVV273pZvQYDgN4lHf5rWidwA&s" alt="Related Image 1">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1Mz1iWbN6O7tQdWCaxX0f_p7ydzCcvjYfXZE8Wrq6FveO_pYBwaxqkPOMXSWqqD5zSKQ&usqp=CAU" alt="Related Image 2">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJFAbGUEtiZiCAhFoo0HJhIpbEzweWpThmtKiXLYGU-Bl_yxNg9MZoFIPhJcABCoNwiRc&usqp=CAU"alt="related image 3>
+	    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxwj5_4hUQyir7cTpkA-Q2B0D5XzJQlGfgl4TF0vvJ_iQyvUbsyKbudDTMn5jlxbAQztw&usqp=CAU"alt="related image 4">
+	     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0YUISZP_dEsMltVFVi2kbHGxSiN385hTlnB7d3lcSCOFXH9sggKPjeAUU3yJRAK2e8hs&usqp=CAU"alt="related Image 5">
+        </div>
+        <div id="related2" class="related-images">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2oFqZmZa8zhF4CbZ31nstm1eNMCgQ6JMSvYAaSkc5PENiZNwaleXBvvDBFeEvGMQyI9U&usqp=CAU" alt="Related Image 6">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7C7N5gkNHT4jITLHFNF-4fUBOPO94Gh4eQ8Yp5d_6lxtqRUAx9g2vDaUxbGr_YFSjSeU&usqp=CAU" alt="Related Image 7">
+	   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQruPBfCwggHtEOQBLfj0vJOSSVfY4TsWwdkz6RcB5TdKlPCCmv7Dnlpbz6Y_z6WilUABs&usqp=CAUhttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqnxHk17QqXmzew_SbnxeYaKCx6LKvs4WhmBauWLmdPyN79ysGCJWiBHar8cf7lP6ym18&usqp=CAU" alt="Related Image 8">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmaatQVz4778NDenK0vGzTDUS9j7cGLby2TA&s" alt="Related Image 9">
+	    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToVpA670sns2b0ivRgrq8hgYM4Q4aZCfS6RE4XCGNm31F3n7hdGneTqr5amQKV3IW5v7Y&usqp=CAU" alt="Related Image 10">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvAjaf0RD3HF1KgloTklLQGFJVBmDVgJ9Tgw&s" alt="Related Image 11">
+	</div>
+        <div id="related3" class="related-images">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa9r6qT0PBIcX7cSMbpOFemUiVBa5tmuVhdSg38iHy3MnD6EPAOWU_o9XCuWh8SyY-Ue0&usqp=CAU" alt="Related Image 5">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1skwLcF_MXYNYaQ7LEAO2yEZp7rbATawB5ZYQs0C7xdCCwkd2Y7MNXy-M88ClHovwyqM&usqp=CAU" alt="Related Image 6">
+ 	   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUVAsAggFpIy9mT_0M-3fE6NYOkQRMNETOgbfUry4l2vuDKSY7gvyJIWt9XglEl1N0TP0&usqp=CAU" alt="Related Image 5">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXiHKqNZ5jjU91k5p1UYkxxFK67iZVilD1dg&s" alt="Related Image 6">
+	    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2Y8pfi-iMSGXUoW8DKK3_pVxsACYdQqI-iZi44WVHh8zqYTPi2jkdl8lMxHnzAsS2X9U&usqp=CAU" alt="Related Image 5">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIKOvZfs8Bf6XIYCcnk3fFwQN9d2CdKwAD6A&s" alt="Related Image 6">
+
+           
+        </div>
+    </section>
+<footer>
+        <div class="footer-content">
+           
+      
+
+	     <p3><a href="tel:+1234567890"><i class="fas fa-phone-alt"></i> +1234567890</a></p3>
+             <p4><a href="mailto:info@example.com"><i class="fas fa-envelope"></i> arofficial@gmail.com</a></p4>
+            <ul class="socials">
+	        <li><a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Architect & Interior. All rights reserved.</p>
+        </div>
+    </footer>
+
+           </main>
+         <script>
+    function showSection(sectionId) {
+        // Hide all sections
+        var sections = document.querySelectorAll('section');
+        sections.forEach(function (section) {
+            section.style.display = 'none';
+        });
+
+        // Show the selected section
+        var selectedSection = document.getElementById(sectionId);
+        selectedSection.style.display = 'block';
+
+        // Handle specific behavior for "About Us" section
+        if (sectionId === 'about') {
+            // Show only the summary initially
+            document.getElementById('about-summary').style.display = 'block';
+            document.getElementById('about-more').style.display = 'none';
+        } else {
+            // For other sections, ensure default text hiding
+            document.getElementById('about-summary').style.display = 'none';
+            document.getElementById('about-more').style.display = 'none';
+        }
+
+        // Hide the reviews section if not on the home page
+        if (sectionId !== 'home') {
+            document.getElementById('reviews').style.display = 'none';
+        } else {
+            document.getElementById('reviews').style.display = 'block';
+        }
+    }
+  function toggleReadMore() {
+        const moreText = document.getElementById('about-more');
+        const btnText = document.getElementById('read-more-btn');
+        if (moreText.style.display === "none") {
+            moreText.style.display = "block";
+            btnText.textContent = "Read Less";
+        } else {
+            moreText.style.display = "none";
+            btnText.textContent = "Read More";
+        }
+    }
+
+    function toggleServices() {
+        // Hide all sections including #home
+        var sections = document.querySelectorAll('section');
+        sections.forEach(function (section) {
+            section.style.display = 'none';
+        });
+
+        // Show only the #services section
+        var servicesSection = document.getElementById("services");
+        servicesSection.style.display = "block";
+
+        // Hide the reviews section
+        document.getElementById('reviews').style.display = 'none';
+    }
+
+       var reviewIndex = 0;
+    function slideReviews() {
+        var reviewSlide = document.querySelector('.review-slide');
+        reviewIndex++;
+        if (reviewIndex >= 3) {
+            reviewIndex = 0;
+        }
+        reviewSlide.style.transform = 'translateX(' + (-reviewIndex * 100 / 3) + '%)';
+    }
+
+    setInterval(slideReviews, 3000);
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            let valid = true;
+
+            // Validate Name
+            const name = document.getElementById('name').value;
+            if (name.trim() === '') {
+                document.getElementById('nameError').style.display = 'block';
+                valid = false;
+            } else {
+                document.getElementById('nameError').style.display = 'none';
+            }
+
+            // Validate Email
+            const email = document.getElementById('email').value;
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!emailPattern.test(email)) {
+                document.getElementById('emailError').style.display = 'block';
+                valid = false;
+            } else {
+                document.getElementById('emailError').style.display = 'none';
+            }
+
+            // Validate Message
+            const message = document.getElementById('message').value;
+            if (message.trim() === '') {
+                document.getElementById('messageError').style.display = 'block';
+                valid = false;
+            } else {
+                document.getElementById('messageError').style.display = 'none';
+            }
+
+            if (valid) {
+                alert('Message sent successfully!');
+                document.getElementById('contactForm').reset();
+            }
+        });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const showMoreButtons = document.querySelectorAll('.show-more');
+
+    showMoreButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const relatedId = this.parentElement.getAttribute('data-related');
+            const relatedImages = document.getElementById(relatedId);
+
+            if (relatedImages.style.display === 'block') {
+                relatedImages.style.display = 'none';
+                this.textContent = 'Show More';
+            } else {
+                relatedImages.style.display = 'block';
+                this.textContent = 'Show Less';
+            }
+        });
+    });
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const socialLinks = document.querySelectorAll('.socials li a');
+
+    socialLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
+            // The default behavior of opening a new tab is handled by the target="_blank" attribute in the HTML
+            console.log(`Opening a new tab for: ${this.href}`);
+        });
+    });
+});
+</script>
+</body>
+</html>
